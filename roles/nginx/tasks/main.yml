@@ -1,0 +1,28 @@
+---
+- name: Ensure Nginx is installed
+  apt:
+    name: nginx
+    state: present
+    update_cache: yes
+
+- name: Copy Nginx load balancer configuration
+  ansible.builtin.template:
+    src: nginx_lb.conf.j2
+    dest: /etc/nginx/sites-enabled/nginx_lb.conf
+  notify:
+    - Restart Nginx
+  become: true
+
+- name: Remove default Nginx configuration
+  ansible.builtin.file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+  notify:
+    - Restart Nginx
+  become: true
+
+- name: Ensure Nginx is started and enabled
+  service:
+    name: nginx
+    state: started
+    enabled: yes

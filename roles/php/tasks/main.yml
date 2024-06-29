@@ -1,0 +1,28 @@
+---
+# tasks file for php
+
+- name: Install php extensions
+  apt:
+    name: "{{ item }}"
+    state: present
+  become: yes
+  with_items:
+    - php8.1
+    - php8.1-fpm
+    - php8.1-mysql
+    - php8.1-gd
+    - php-ssh2
+    - mysql-client-core-8.0
+    #- php8.1-mcrypt
+
+- name: Setup php-fpm
+  replace: dest=/etc/php/8.1/fpm/php.ini regexp="(;cgi.fix_pathinfo=1)" replace="cgi.fix_pathinfo=0"
+  notify:
+    - restart nginx
+  become: yes
+
+- name: Add php settings
+  template: src=../../nginx_w/templates/nginx-wp-common.conf dest=/etc/nginx/nginx-wp-common.conf owner=www-data group=www-data mode=0644
+  notify:
+    - restart nginx
+  become: yes

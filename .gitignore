@@ -1,0 +1,8 @@
+.terraform/*
+.terraform.*
+hosts
+id_rsa
+id_rsa.pub
+key.json
+terraform.tfstate*
+cloud-config.yaml

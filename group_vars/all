@@ -1,0 +1,22 @@
+# WordPress database settings
+wp_db_name: wordpress
+wp_db_user: wordpress
+wp_db_password: wordpress_db_password
+wp_db_ip: 10.5.0.200
+
+mysql_port: 3306
+mysql_root_password: root
+
+auto_up_disable: true
+
+server_hostname: test1.com
+
+# WordPress Version
+wp_version: 5.9.10
+wp_sha1sum: 4e3501cf504b1004868d57f6b4173c68fd798415
+
+#Define Core Update Level
+#true  = Development, minor, and major updates are all enabled
+#false = Development, minor, and major updates are all disabled
+#minor = Minor updates are enabled, development, and major updates are disabled
+core_update_level: true
